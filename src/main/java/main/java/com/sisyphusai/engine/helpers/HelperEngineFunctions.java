@@ -1,27 +1,48 @@
-package main.java.com.sisyphusai.engine;
+package main.java.com.sisyphusai.engine.helpers;
 
 public class HelperEngineFunctions {
+    private static final int PAWN_VALUE = 100;
+    private static final int KNIGHT_VALUE = 320;
+    private static final int BISHOP_VALUE = 330;
+    private static final int ROOK_VALUE = 500;
+    private static final int QUEEN_VALUE = 900;
+    private static final int KING_VALUE = 20000;
 
-    // static int getPieceValue(int piece) {
-    // piece = Math.abs(piece);
+    public static int getPieceValue(char piece) {
+        switch (piece) {
+            case 'P':
+                return PAWN_VALUE;
 
-    // switch (Character.toLowerCase(piece)) {
-    // case 1:
-    // return PAWN_VALUE;
-    // case 2:
-    // return KNIGHT_VALUE;
-    // case 3:
-    // return BISHOP_VALUE;
-    // case 4:
-    // return ROOK_VALUE;
-    // case 5:
-    // return QUEEN_VALUE;
-    // case 6:
-    // return KING_VALUE;
-    // default:
-    // return 0;
-    // }
-    // }
+            case 'N':
+                return KNIGHT_VALUE;
+
+            case 'B':
+                return BISHOP_VALUE;
+
+            case 'R':
+                return ROOK_VALUE;
+
+            case 'Q':
+                return QUEEN_VALUE;
+
+            case 'p':
+                return PAWN_VALUE;
+
+            case 'n':
+                return KNIGHT_VALUE;
+
+            case 'b':
+                return BISHOP_VALUE;
+
+            case 'r':
+                return ROOK_VALUE;
+
+            case 'q':
+                return QUEEN_VALUE;
+            default:
+                return 0;
+        }
+    }
 
     public static char[] parseFEN(String fen) {
         // Split the FEN string into its six parts
@@ -83,53 +104,4 @@ public class HelperEngineFunctions {
         return parsedFen;
     }
 
-    public static int materialEvaluator(char[] parsedFen) {
-        final int PAWN_VALUE = 100;
-        final int KNIGHT_VALUE = 320;
-        final int BISHOP_VALUE = 330;
-        final int ROOK_VALUE = 500;
-        final int QUEEN_VALUE = 900;
-        final int KING_VALUE = 20000;
-
-        int totalEvaluation = 0;
-
-        // Iterate over the board part of the parsed FEN
-        for (int i = 0; i < 64; i++) {
-            char piece = parsedFen[i];
-            switch (piece) {
-                case 'P':
-                    totalEvaluation += PAWN_VALUE;
-                    break;
-                case 'N':
-                    totalEvaluation += KNIGHT_VALUE;
-                    break;
-                case 'B':
-                    totalEvaluation += BISHOP_VALUE;
-                    break;
-                case 'R':
-                    totalEvaluation += ROOK_VALUE;
-                    break;
-                case 'Q':
-                    totalEvaluation += QUEEN_VALUE;
-                    break;
-                case 'p':
-                    totalEvaluation -= PAWN_VALUE;
-                    break;
-                case 'n':
-                    totalEvaluation -= KNIGHT_VALUE;
-                    break;
-                case 'b':
-                    totalEvaluation -= BISHOP_VALUE;
-                    break;
-                case 'r':
-                    totalEvaluation -= ROOK_VALUE;
-                    break;
-                case 'q':
-                    totalEvaluation -= QUEEN_VALUE;
-                    break;
-            }
-        }
-
-        return totalEvaluation;
-    }
 }
