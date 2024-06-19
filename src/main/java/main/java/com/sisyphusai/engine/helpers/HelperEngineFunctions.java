@@ -1,6 +1,11 @@
 package main.java.com.sisyphusai.engine.helpers;
 
+/**
+ * A utility class containing helper functions for a chess engine.
+ */
 public class HelperEngineFunctions {
+
+    // Piece values (adjust as needed)
     private static final int PAWN_VALUE = 100;
     private static final int KNIGHT_VALUE = 320;
     private static final int BISHOP_VALUE = 330;
@@ -8,6 +13,13 @@ public class HelperEngineFunctions {
     private static final int QUEEN_VALUE = 900;
     private static final int KING_VALUE = 20000;
 
+    /**
+     * Gets the value of a chess piece.
+     *
+     * @param piece The character representing the piece ('P', 'N', 'B', 'R', 'Q',
+     *              'p', 'n', 'b', 'r', 'q').
+     * @return The value of the piece (positive for white, negative for black).
+     */
     public static int getPieceValue(char piece) {
         switch (piece) {
             case 'P':
@@ -24,26 +36,36 @@ public class HelperEngineFunctions {
 
             case 'Q':
                 return QUEEN_VALUE;
+            case 'K':
+                return KING_VALUE;
 
             case 'p':
-                return PAWN_VALUE;
+                return -PAWN_VALUE;
 
             case 'n':
-                return KNIGHT_VALUE;
+                return -KNIGHT_VALUE;
 
             case 'b':
-                return BISHOP_VALUE;
+                return -BISHOP_VALUE;
 
             case 'r':
-                return ROOK_VALUE;
+                return -ROOK_VALUE;
 
             case 'q':
-                return QUEEN_VALUE;
+                return -QUEEN_VALUE;
+            case 'k':
+                return -KING_VALUE;
             default:
                 return 0;
         }
     }
 
+    /**
+     * Parses a FEN (Forsyth-Edwards Notation) string into a character array.
+     *
+     * @param fen The FEN string representing the board position.
+     * @return A character array containing the parsed FEN data.
+     */
     public static char[] parseFEN(String fen) {
         // Split the FEN string into its six parts
         String[] parts = fen.split(" ");
@@ -104,4 +126,10 @@ public class HelperEngineFunctions {
         return parsedFen;
     }
 
+    // Mirror the index for black pieces
+    public static int mirrorIndex(int square) {
+        int row = square / 8;
+        int col = square % 8;
+        return (7 - row) * 8 + col;
+    }
 }
