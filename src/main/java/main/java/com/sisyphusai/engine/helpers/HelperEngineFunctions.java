@@ -132,4 +132,15 @@ public class HelperEngineFunctions {
         int col = square % 8;
         return (7 - row) * 8 + col;
     }
+
+    public static boolean isEndgame(char[] parsedFen) {
+        int pieceCount = 0;
+        for (int i = 0; i < 64; i++) {
+            if (parsedFen[i] != '1') {
+                pieceCount++;
+            }
+        }
+
+        return pieceCount <= 10;
+    }
 }

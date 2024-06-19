@@ -24,13 +24,17 @@ public class Evaluator {
         int evaluation = 0;
 
         int materialEvaluator = materialEvaluator(parsedFen);
-        int evaluatePositionByPieceSquareTables = evaluatePositionByPieceSquareTables(parsedFen, isEndgame(parsedFen));
+        int evaluatePositionByPieceSquareTables = evaluatePositionByPieceSquareTables(parsedFen,
+                HelperEngineFunctions.isEndgame(parsedFen));
         int evaluatePawnStructure = evaluatePawnStructure(parsedFen);
         // return materialEvaluator(parsedFen);
 
-        // evaluation += materialEvaluator * 1.2 + evaluatePositionByPieceSquareTables *
-        // 1.5 + evaluatePawnStructure * 1.3;
-        return evaluatePawnStructure;
+        System.out.println("Material: " + materialEvaluator);
+        System.out.println("Piece-Square Tables: " + evaluatePositionByPieceSquareTables);
+        System.out.println("Pawn Structure: " + evaluatePawnStructure);
+        evaluation += materialEvaluator * 1.2 + evaluatePositionByPieceSquareTables *
+                1.5 + evaluatePawnStructure * 1.3;
+        return evaluation;
         // return evaluatePawnStructure;
     }
 
@@ -205,17 +209,6 @@ public class Evaluator {
             }
         }
         return totalEvaluation;
-    }
-
-    private boolean isEndgame(char[] parsedFen) {
-        int pieceCount = 0;
-        for (int i = 0; i < 64; i++) {
-            if (parsedFen[i] != '1') {
-                pieceCount++;
-            }
-        }
-
-        return pieceCount <= 10;
     }
 
 }
